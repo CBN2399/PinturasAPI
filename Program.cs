@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PinturasAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PinturasAPIContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PinturasAPIContext") ?? throw new InvalidOperationException("Connection string 'PinturasAPIContext' not found.")));
 
 // Add services to the container.
 
