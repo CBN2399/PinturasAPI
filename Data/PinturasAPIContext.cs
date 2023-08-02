@@ -19,7 +19,7 @@ namespace PinturasAPI.Data
         {
         }
 
-        public virtual DbSet<imagen> imagens { get; set; }
+        public virtual DbSet<imagen> imagenes { get; set; }
         public virtual DbSet<tipo> tipos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

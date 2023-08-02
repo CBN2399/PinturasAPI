@@ -25,22 +25,22 @@ namespace PinturasAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<imagen>>> Getimagens()
         {
-          if (_context.imagens == null)
+          if (_context.imagenes == null)
           {
               return NotFound();
           }
-            return await _context.imagens.ToListAsync();
+            return await _context.imagenes.ToListAsync();
         }
 
         // GET: api/imagenes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<imagen>> Getimagen(int id)
         {
-          if (_context.imagens == null)
+          if (_context.imagenes == null)
           {
               return NotFound();
           }
-            var imagen = await _context.imagens.FindAsync(id);
+            var imagen = await _context.imagenes.FindAsync(id);
 
             if (imagen == null)
             {
@@ -86,11 +86,11 @@ namespace PinturasAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<imagen>> Postimagen(imagen imagen)
         {
-          if (_context.imagens == null)
+          if (_context.imagenes == null)
           {
               return Problem("Entity set 'PinturasAPIContext.imagens'  is null.");
           }
-            _context.imagens.Add(imagen);
+            _context.imagenes.Add(imagen);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("Getimagen", new { id = imagen.id }, imagen);
@@ -100,17 +100,17 @@ namespace PinturasAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Deleteimagen(int id)
         {
-            if (_context.imagens == null)
+            if (_context.imagenes == null)
             {
                 return NotFound();
             }
-            var imagen = await _context.imagens.FindAsync(id);
+            var imagen = await _context.imagenes.FindAsync(id);
             if (imagen == null)
             {
                 return NotFound();
             }
 
-            _context.imagens.Remove(imagen);
+            _context.imagenes.Remove(imagen);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -118,7 +118,7 @@ namespace PinturasAPI.Controllers
 
         private bool imagenExists(int id)
         {
-            return (_context.imagens?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.imagenes?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }
