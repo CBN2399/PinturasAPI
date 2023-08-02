@@ -12,35 +12,35 @@ namespace PinturasAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TiposController : ControllerBase
+    public class tiposController : ControllerBase
     {
         private readonly PinturasAPIContext _context;
 
-        public TiposController(PinturasAPIContext context)
+        public tiposController(PinturasAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tipos
+        // GET: api/tipos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tipo>>> GetTipo()
+        public async Task<ActionResult<IEnumerable<tipo>>> Gettipos()
         {
-          if (_context.Tipo == null)
+          if (_context.tipos == null)
           {
               return NotFound();
           }
-            return await _context.Tipo.ToListAsync();
+            return await _context.tipos.ToListAsync();
         }
 
-        // GET: api/Tipos/5
+        // GET: api/tipos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tipo>> GetTipo(int id)
+        public async Task<ActionResult<tipo>> Gettipo(int id)
         {
-          if (_context.Tipo == null)
+          if (_context.tipos == null)
           {
               return NotFound();
           }
-            var tipo = await _context.Tipo.FindAsync(id);
+            var tipo = await _context.tipos.FindAsync(id);
 
             if (tipo == null)
             {
@@ -50,12 +50,12 @@ namespace PinturasAPI.Controllers
             return tipo;
         }
 
-        // PUT: api/Tipos/5
+        // PUT: api/tipos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTipo(int id, Tipo tipo)
+        public async Task<IActionResult> Puttipo(int id, tipo tipo)
         {
-            if (id != tipo.Id)
+            if (id != tipo.id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace PinturasAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TipoExists(id))
+                if (!tipoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace PinturasAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Tipos
+        // POST: api/tipos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tipo>> PostTipo(Tipo tipo)
+        public async Task<ActionResult<tipo>> Posttipo(tipo tipo)
         {
-          if (_context.Tipo == null)
+          if (_context.tipos == null)
           {
-              return Problem("Entity set 'PinturasAPIContext.Tipo'  is null.");
+              return Problem("Entity set 'PinturasAPIContext.tipos'  is null.");
           }
-            _context.Tipo.Add(tipo);
+            _context.tipos.Add(tipo);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTipo", new { id = tipo.Id }, tipo);
+            return CreatedAtAction("Gettipo", new { id = tipo.id }, tipo);
         }
 
-        // DELETE: api/Tipos/5
+        // DELETE: api/tipos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTipo(int id)
+        public async Task<IActionResult> Deletetipo(int id)
         {
-            if (_context.Tipo == null)
+            if (_context.tipos == null)
             {
                 return NotFound();
             }
-            var tipo = await _context.Tipo.FindAsync(id);
+            var tipo = await _context.tipos.FindAsync(id);
             if (tipo == null)
             {
                 return NotFound();
             }
 
-            _context.Tipo.Remove(tipo);
+            _context.tipos.Remove(tipo);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TipoExists(int id)
+        private bool tipoExists(int id)
         {
-            return (_context.Tipo?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.tipos?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }

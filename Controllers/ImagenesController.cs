@@ -12,35 +12,35 @@ namespace PinturasAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ImagenesController : ControllerBase
+    public class imagenesController : ControllerBase
     {
         private readonly PinturasAPIContext _context;
 
-        public ImagenesController(PinturasAPIContext context)
+        public imagenesController(PinturasAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Imagenes
+        // GET: api/imagenes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Imagen>>> GetImagen()
+        public async Task<ActionResult<IEnumerable<imagen>>> Getimagens()
         {
-          if (_context.Imagen == null)
+          if (_context.imagens == null)
           {
               return NotFound();
           }
-            return await _context.Imagen.ToListAsync();
+            return await _context.imagens.ToListAsync();
         }
 
-        // GET: api/Imagenes/5
+        // GET: api/imagenes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Imagen>> GetImagen(int id)
+        public async Task<ActionResult<imagen>> Getimagen(int id)
         {
-          if (_context.Imagen == null)
+          if (_context.imagens == null)
           {
               return NotFound();
           }
-            var imagen = await _context.Imagen.FindAsync(id);
+            var imagen = await _context.imagens.FindAsync(id);
 
             if (imagen == null)
             {
@@ -50,12 +50,12 @@ namespace PinturasAPI.Controllers
             return imagen;
         }
 
-        // PUT: api/Imagenes/5
+        // PUT: api/imagenes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutImagen(int id, Imagen imagen)
+        public async Task<IActionResult> Putimagen(int id, imagen imagen)
         {
-            if (id != imagen.Id)
+            if (id != imagen.id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace PinturasAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ImagenExists(id))
+                if (!imagenExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace PinturasAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Imagenes
+        // POST: api/imagenes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Imagen>> PostImagen(Imagen imagen)
+        public async Task<ActionResult<imagen>> Postimagen(imagen imagen)
         {
-          if (_context.Imagen == null)
+          if (_context.imagens == null)
           {
-              return Problem("Entity set 'PinturasAPIContext.Imagen'  is null.");
+              return Problem("Entity set 'PinturasAPIContext.imagens'  is null.");
           }
-            _context.Imagen.Add(imagen);
+            _context.imagens.Add(imagen);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetImagen", new { id = imagen.Id }, imagen);
+            return CreatedAtAction("Getimagen", new { id = imagen.id }, imagen);
         }
 
-        // DELETE: api/Imagenes/5
+        // DELETE: api/imagenes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteImagen(int id)
+        public async Task<IActionResult> Deleteimagen(int id)
         {
-            if (_context.Imagen == null)
+            if (_context.imagens == null)
             {
                 return NotFound();
             }
-            var imagen = await _context.Imagen.FindAsync(id);
+            var imagen = await _context.imagens.FindAsync(id);
             if (imagen == null)
             {
                 return NotFound();
             }
 
-            _context.Imagen.Remove(imagen);
+            _context.imagens.Remove(imagen);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ImagenExists(int id)
+        private bool imagenExists(int id)
         {
-            return (_context.Imagen?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.imagens?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }
